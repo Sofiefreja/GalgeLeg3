@@ -16,7 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+
+import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 import static com.example.sofie.galgeleg.MainMenu.logic;
@@ -28,13 +32,15 @@ import static com.example.sofie.galgeleg.MainMenu.logic;
 public class Game extends Fragment implements View.OnClickListener {
     private int seconds = 0;
     private boolean running;
-    TextView timeView=null;
+    TextView timeView = null;
     Handler handler = null;
     private Button gameButton;
     private EditText et;
     private ImageView gameImageView;
     private TextView gameTextView;
     SharedPreferences shared;
+    private long scoreStartTime;
+    private double scoreTimeResult;
     public static int numberOfVictories;
     static Integer[] imageIDs = {
             R.drawable.hangman,
@@ -57,14 +63,15 @@ public class Game extends Fragment implements View.OnClickListener {
         et = (EditText) source.findViewById(R.id.et);
 
         gameButton.setOnClickListener(this);
-      // et.setOnClickListener(R.id.et);
+        // et.setOnClickListener(R.id.et);
 
         handler = new Handler();
-       // numberOfVictories = sharedP.getInt
+        // numberOfVictories = sharedP.getInt
         startGame();
         shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
         numberOfVictories = shared.getInt("numberOfVictories", numberOfVictories);
 
+        scoreStartTime = System.currentTimeMillis();
         return source;
     }
 
@@ -92,16 +99,15 @@ public class Game extends Fragment implements View.OnClickListener {
     }
 
 
-
     public void startGame() {
-       // logic.tara();
+        //logic.tara();
 
-        gameTextView.setText("Welcome to hangman!" +
-                "\nThis is the word you have to guess: "+logic.getWord());
+        gameTextView.setText("This is the word you have to guess: " + logic.getWord());
         et.setHint("Write letter here.");
         gameImageView.setImageResource(imageIDs[logic.getWrongLetters()]);
         System.out.println(logic.getTheWord());
-;    }
+        ;
+    }
 
     private void endGame() {
 
@@ -127,6 +133,8 @@ public class Game extends Fragment implements View.OnClickListener {
 
         if (logic.gameWon()) {
             gameTextView.append("\nYou win!");
+            scoreTimeResult = (System.currentTimeMillis() - scoreStartTime) / 1000.0;
+            saveHighScore(logic.getTheWord().length(), scoreTimeResult);
             //shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
             numberOfVictories = shared.getInt("numberOfVictories", numberOfVictories);
             System.out.println(numberOfVictories);
@@ -144,6 +152,27 @@ public class Game extends Fragment implements View.OnClickListener {
             gameTextView.setText("You lost... The word was : " + logic.getTheWord());
             endGame();
         }
+    }
+
+    private void saveHighScore(int score, Double scoreTimeResult) {
+        SharedPreferences prefObj = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = prefObj.edit();
+        Gson gsonObj = new Gson();
+        String highscoreJson = prefObj.getString("highscore", null);
+
+        ArrayList<String> highscores;
+        if (highscoreJson != null) {
+            //Konverter Json string til ArrayList object
+            highscores = gsonObj.fromJson(highscoreJson, new TypeToken<ArrayList<String>>() {
+            }.getType());
+        } else {
+            highscores = new ArrayList<String>();
+        }
+        highscores.add(score + "In time: " + scoreTimeResult);
+        System.out.print("HIGHSCORES: " + highscores.toString());
+        editor.putString("highscore", gsonObj.toJson(highscores)).apply();
+
+        //get antal forkerte bogstaver
     }
 
 

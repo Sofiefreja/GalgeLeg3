@@ -55,8 +55,7 @@ public class Words extends Fragment implements View.OnClickListener, AdapterView
         return source;
 
     }
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String sSelected = parent.getItemAtPosition(pos).toString();
         Toast.makeText(getActivity(),sSelected,Toast.LENGTH_SHORT).show();
         logic.setWord(sSelected);

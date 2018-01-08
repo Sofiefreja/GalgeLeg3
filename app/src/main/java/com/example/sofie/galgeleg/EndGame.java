@@ -46,22 +46,25 @@ public class EndGame extends Fragment implements View.OnClickListener {
         endButton1.setText("Yes");
         endButton2.setText("No");
         endTextView2.setText("Want to play again?");
+
+        endButton1.setOnClickListener(this);
+        endButton2.setOnClickListener(this);
         endiv.setImageResource(Game.imageIDs[logic.getWrongLetters()]);
 
         if (logic.LastLetter() == true) {
-
+            int width = getResources().getDisplayMetrics().widthPixels;
             konfettiView = (KonfettiView) source.findViewById(R.id.confetti);
             konfettiView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     konfettiView.build()
-                            .addColors(Color.RED,Color.GREEN)
-                            .setSpeed(1f,5f)
+                            .addColors(Color.RED, Color.GREEN)
+                            .setSpeed(1f, 5f)
                             .setFadeOutEnabled(true)
                             .setTimeToLive(2000L)
                             .addShapes(Shape.RECT, Shape.CIRCLE)
-                            .setPosition(0f,-359f,-359f,0f)
-                            .stream(200,5000L);
+                            .setPosition(0f, -359f, -359f, 0f)
+                            .stream(200, 5000L);
                 }
             });
             endTextView.setText("You won the game! You used " + logic.getGuesses() + " guesses to guess the word: " + logic.getTheWord() + "!");
@@ -71,8 +74,6 @@ public class EndGame extends Fragment implements View.OnClickListener {
             endTextView.setText("You lost the game! The word was: " + logic.getTheWord() + " in time!");
         }
 
-        endButton1.setOnClickListener(this);
-        endButton2.setOnClickListener(this);
 
         return source;
 
