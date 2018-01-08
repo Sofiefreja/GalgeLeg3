@@ -103,6 +103,6 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     }
     public void onResume() {
         super.onResume();
-        victories.setText("Number of victories " + numberOfVictories);
+        victories.setText("NUMBER OF VICTORIES SO FAR: " + numberOfVictories);
     }
 }

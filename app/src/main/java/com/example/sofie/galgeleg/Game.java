@@ -2,6 +2,7 @@ package com.example.sofie.galgeleg;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -147,10 +148,14 @@ public class Game extends Fragment implements View.OnClickListener {
             System.out.println(numberOfVictories);
 
             endGame();
+            logic.tara();
         }
         if (logic.gameLost()) {
+            MediaPlayer lose = MediaPlayer.create(getActivity(), R.raw.horn);
+            lose.start();
             gameTextView.setText("You lost... The word was : " + logic.getTheWord());
             endGame();
+            logic.tara();
         }
     }
 

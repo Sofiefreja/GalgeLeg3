@@ -47,8 +47,6 @@ public class EndGame extends Fragment implements View.OnClickListener {
         endButton2.setText("No");
         endTextView2.setText("Want to play again?");
 
-        endButton1.setOnClickListener(this);
-        endButton2.setOnClickListener(this);
         endiv.setImageResource(Game.imageIDs[logic.getWrongLetters()]);
 
         if (logic.LastLetter() == true) {
@@ -69,6 +67,8 @@ public class EndGame extends Fragment implements View.OnClickListener {
             });
             endTextView.setText("You won the game! You used " + logic.getGuesses() + " guesses to guess the word: " + logic.getTheWord() + "!");
             System.out.println("Love");
+        endButton1.setOnClickListener(this);
+        endButton2.setOnClickListener(this);
         } else if (logic.LastLetter() == false) {
             lose.start();
             endTextView.setText("You lost the game! The word was: " + logic.getTheWord() + " in time!");

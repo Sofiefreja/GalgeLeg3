@@ -33,6 +33,7 @@ public class Words extends Fragment implements View.OnClickListener, AdapterView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View source = inflater.inflate(R.layout.activity_words, container, false);
+
         Spinner spinner = (Spinner) source.findViewById(R.id.spinner);
         startGame = (Button) source.findViewById(R.id.startGame2);
 
