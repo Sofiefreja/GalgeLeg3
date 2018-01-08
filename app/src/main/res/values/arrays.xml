@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Words">
+        <item>adult </item>
+        <item>aeroplane</item>
+        <item>air </item>
+         <item>aircraft Carrier</item>
+         <item>airforce</item>
+         <item> Airport</item>
+         <item> Album</item>
+         <item> Alphabet</item>
+         <item> Apple</item>
+         <item> Arm</item>
+         <item> Army</item>
+         <item> Baby</item>
+         <item> Backpack</item>
+         <item> Balloon</item>
+         <item> Banana</item>
+         <item> Bank</item>
+         <item> Barbecue</item>
+         <item> Bathroom</item>
+         <item> Bathtub</item>
+         <item> Bed</item>
+         <item> Bee</item>
+         <item> Bible</item>
+         <item> Bird</item>
+         <item> Bomb</item>
+         <item> Book</item>
+         <item> Boss</item>
+         <item> Bottle</item>
+         <item> Bowl</item>
+         <item> Box</item>
+         <item> Boy</item>
+         <item> Brain</item>
+         <item> Bridge</item>
+         <item> Butterfly</item>
+         <item> Button</item>
+         <item> Cappuccino</item>
+         <item> Car</item>
+    </string-array>
+</resources>
