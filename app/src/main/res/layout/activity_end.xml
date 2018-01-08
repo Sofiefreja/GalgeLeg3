@@ -32,7 +32,7 @@
         android:layout_alignBottom="@+id/endBut2"
         android:layout_marginEnd="49dp"
         android:layout_toStartOf="@+id/endBut2"
-        android:text="Button"
+        android:text="Ja"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/endBut2"
         app:layout_constraintHorizontal_bias="0.558"
@@ -48,7 +48,7 @@
         android:layout_below="@+id/endiv"
         android:layout_marginEnd="60dp"
         android:layout_marginTop="87dp"
-        android:text="Button"
+        android:text="Nej"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -79,5 +79,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endiv"
         app:layout_constraintVertical_bias="0.878" />
+
 
 </RelativeLayout>
