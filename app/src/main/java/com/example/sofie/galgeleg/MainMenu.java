@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.content.SharedPreferences;
 
 import com.example.sofie.galgeleg.logic.HangManLogic;
 
+import static com.example.sofie.galgeleg.Game.numberOfVictories;
+
 /**
  * Created by sofie on 23-10-2017.
  */
@@ -23,7 +26,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     private TextView frametv;
     static HangManLogic logic = new HangManLogic();
     TextView victories;
-    SharedPreferences sharedP;
+    SharedPreferences shared;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +51,13 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         settings.setOnClickListener(this);
         help.setOnClickListener(this);
         //highScores.setOnClickListener(this);
+        victories = (TextView) src.findViewById(R.id.victories);
 
+        shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        numberOfVictories = shared.getInt("NumberofVictories",  numberOfVictories);
+        victories.setText("Number of victories " +  numberOfVictories);
+
+        victories = (TextView) src.findViewById(R.id.victories);
         return src;
 }
 
@@ -85,5 +94,9 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
         }*/
 
+    }
+    public void onResume() {
+        super.onResume();
+        victories.setText("Number of victories " + numberOfVictories);
     }
 }

@@ -1,8 +1,11 @@
 package com.example.sofie.galgeleg;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +34,7 @@ public class Game extends Fragment implements View.OnClickListener {
     private EditText et;
     private ImageView gameImageView;
     private TextView gameTextView;
-
+    SharedPreferences shared;
     public static int numberOfVictories;
     static Integer[] imageIDs = {
             R.drawable.hangman,
@@ -59,6 +62,8 @@ public class Game extends Fragment implements View.OnClickListener {
         handler = new Handler();
        // numberOfVictories = sharedP.getInt
         startGame();
+        shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        numberOfVictories = shared.getInt("numberOfVictories", numberOfVictories);
 
         return source;
     }
@@ -122,6 +127,16 @@ public class Game extends Fragment implements View.OnClickListener {
 
         if (logic.gameWon()) {
             gameTextView.append("\nYou win!");
+            //shared = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            numberOfVictories = shared.getInt("numberOfVictories", numberOfVictories);
+            System.out.println(numberOfVictories);
+            numberOfVictories += 1;
+
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putInt("numberOfVictories", numberOfVictories);
+            editor.apply();
+
+            System.out.println(numberOfVictories);
 
             endGame();
         }
